@@ -9,17 +9,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden; /* Evita que a página tenha rolagem horizontal */
+    transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         header {
@@ -149,21 +150,24 @@
     gap: 20px;
     padding: 20px;
     width: 100%;
+    mas-width: 100%
     max-width: 1200px;
     margin: 0 auto; /* Centraliza o container na tela */
+    box-sizing: border-box;
 }
 
 .card {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 25px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeIn 0.5s ease-in-out;
-    width: 100%;
+    width: calc(100% - 40px); /* Subtrai o padding/margin para evitar overflow */
     max-width: 400px;
-    margin: 5px; /* Adiciona espaçamento ao redor dos cards */
+    margin: 10px;
+    box-sizing: border-box; /* Inclui padding e bordas dentro da largura */
 }
         .card:hover {
             transform: translateY(-10px);
