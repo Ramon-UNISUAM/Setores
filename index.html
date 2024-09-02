@@ -9,18 +9,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
         body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    color: #333;
-    overflow-x: hidden; /* Evita que a página tenha rolagem horizontal */
-    transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
         header {
@@ -38,33 +38,20 @@
 
         header img {
             max-height: 40px;
-            margin-left: 20px;
         }
 
         .menu-icon {
+            display: none;
             font-size: 28px;
             cursor: pointer;
             color: #ffffff;
             margin-left: auto;
-            margin-right: 20px;
         }
 
         .button-group {
-            display: none;
-            flex-direction: column;
+            display: flex;
             gap: 10px;
             align-items: center;
-            background-color: #004070;
-            position: absolute;
-            top: 60px;
-            right: 20px;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .button-group.show {
-            display: flex;
         }
 
         .theme-toggle {
@@ -103,19 +90,10 @@
             opacity: 1;
         }
 
-        .search-icon {
-            background-color: transparent;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
         .search-bar {
-            display: none;
-            margin-top: 10px;
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .search-bar input {
@@ -133,42 +111,26 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        h1 {
-            margin-top: 30px;
-            font-weight: 600;
-            font-size: 2.5em;
-            text-align: center;
-            letter-spacing: 1px;
-            color: #333;
-            transition: color 0.3s ease;
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box;
         }
 
-        .container {
-    display: flex;
-    flex-wrap: wrap; /* Permite que os cards se movam para baixo em telas menores */
-    justify-content: center; /* Centraliza os cards dentro do container */
-    gap: 20px;
-    padding: 20px;
-    width: 100%;
-    mas-width: 100%
-    max-width: 1200px;
-    margin: 0 auto; /* Centraliza o container na tela */
-    box-sizing: border-box;
-}
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
-.card {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeIn 0.5s ease-in-out;
-    width: calc(100% - 40px); /* Subtrai o padding/margin para evitar overflow */
-    max-width: 400px;
-    margin: 10px;
-    box-sizing: border-box; /* Inclui padding e bordas dentro da largura */
-}
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
@@ -232,7 +194,7 @@
             transform: translateY(-5px);
         }
 
-        .show-links {
+        .card .show-links {
             display: none;
             flex-direction: column;
             gap: 15px;
@@ -302,23 +264,41 @@
             background-color: #444;
         }
 
+        /* Media Queries */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-
-            .card {
-                width: 90%;
-                max-width: none;
-            }
-
-            header {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
             .menu-icon {
-                font-size: 24px;
+                display: block;
+            }
+
+            .button-group {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+                background-color: #004070;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .button-group.show {
+                display: flex;
+            }
+
+            .search-bar {
+                display: none;
+                margin-top: 10px;
+            }
+
+            header .search-bar {
+                display: none;
+            }
+
+            header .button-group {
+                display: flex;
             }
         }
     </style>
@@ -345,6 +325,7 @@
     <div id="noResults">Nenhum setor encontrado.</div>
 
     <div class="container" id="cardContainer">
+        <!-- Card template -->
         <div class="card">
             <h2>Setor Bolsas</h2>
             <div class="tooltip">
@@ -356,7 +337,8 @@
                 <a href="https://meet.jit.si/SetorBolsas" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
- <div class="card">
+        <!-- Repetir para os demais setores -->
+        <div class="card">
             <h2>Setor Coordenação</h2>
             <div class="tooltip">
                 <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
@@ -367,7 +349,7 @@
                 <a href="https://meet.jit.si/SetorCoordenacao" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Diplomas</h2>
             <div class="tooltip">
@@ -379,6 +361,7 @@
                 <a href="https://meet.jit.si/SetorDiplomas" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Relacionamento</h2>
             <div class="tooltip">
@@ -390,7 +373,7 @@
                 <a href="https://meet.jit.si/SetorRelacionamento" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Captação</h2>
             <div class="tooltip">
@@ -402,7 +385,7 @@
                 <a href="https://meet.jit.si/SetorCaptacao" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Retenção e Permanência</h2>
             <div class="tooltip">
@@ -414,7 +397,7 @@
                 <a href="https://meet.jit.si/SetorRetencao" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Tecnologias Educacionais</h2>
             <div class="tooltip">
@@ -426,7 +409,7 @@
                 <a href="https://meet.jit.si/SetorTecnologiasEducacionais" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Suporte Financeiro</h2>
             <div class="tooltip">
@@ -438,7 +421,7 @@
                 <a href="https://meet.jit.si/SetorSuporteFinanceiro" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Eventos</h2>
             <div class="tooltip">
@@ -450,7 +433,7 @@
                 <a href="https://meet.jit.si/SetorEventos" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-        
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Marketing</h2>
             <div class="tooltip">
@@ -462,6 +445,7 @@
                 <a href="https://meet.jit.si/SetorMarketing" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
+        <!-- Repetir para outros setores -->
         <div class="card">
             <h2>Setor Stricto-Sensu</h2>
             <div class="tooltip">
@@ -474,6 +458,7 @@
             </div>
         </div>
     </div>
+
     <script>
         function filterCards() {
             var input, filter, container, cards, h2, i, txtValue;
