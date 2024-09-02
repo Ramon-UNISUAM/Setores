@@ -39,7 +39,6 @@
         header img {
             max-height: 40px;
     margin-left: 20px;
-    margin-right: 10px; /* Adicione essa linha para espaçamento */
         }
 
         .menu-icon {
@@ -509,7 +508,17 @@
             }
         }
 
-        // Função para fechar o menu ao clicar fora dele
+        function toggleMenu() {
+            const buttonGroup = document.querySelector('.button-group');
+            buttonGroup.classList.toggle('show');
+        }
+
+        function toggleSearchBar() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = searchBar.style.display === 'none' || searchBar.style.display === '' ? 'block' : 'none';
+        }
+        
+// Função para fechar o menu ao clicar fora dele
 document.addEventListener('click', function(event) {
     const menu = document.querySelector('.button-group');
     const menuIcon = document.querySelector('.menu-icon');
@@ -518,12 +527,7 @@ document.addEventListener('click', function(event) {
         menu.classList.remove('show');
     }
 });
-        }
-
-        function toggleSearchBar() {
-            const searchBar = document.querySelector('.search-bar');
-            searchBar.style.display = searchBar.style.display === 'none' || searchBar.style.display === '' ? 'block' : 'none';
-        }
+        
     </script>
 </body>
 </html>
