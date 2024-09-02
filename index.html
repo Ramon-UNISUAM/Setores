@@ -41,12 +41,6 @@
             margin-left: 20px;
         }
 
-        @media (min-width: 769px) {
-            header img {
-                margin-left: 40px;
-            }
-        }
-
         .menu-icon {
             display: none;
             font-size: 28px;
@@ -61,7 +55,7 @@
             align-items: center;
         }
 
-        .theme-toggle {
+        .theme-toggle, .search-icon {
             background-color: transparent;
             border: none;
             font-size: 24px;
@@ -71,11 +65,11 @@
             position: relative;
         }
 
-        .theme-toggle:hover {
+        .theme-toggle:hover, .search-icon:hover {
             transform: scale(1.2);
         }
 
-        .theme-toggle .tooltiptext {
+        .theme-toggle .tooltiptext, .search-icon .tooltiptext {
             visibility: hidden;
             width: 140px;
             background-color: #555;
@@ -92,7 +86,7 @@
             transition: opacity 0.3s;
         }
 
-        .theme-toggle:hover .tooltiptext {
+        .theme-toggle:hover .tooltiptext, .search-icon:hover .tooltiptext {
             visibility: visible;
             opacity: 1;
         }
@@ -272,41 +266,39 @@
         }
 
         /* Media Queries */
-       @media (max-width: 768px) {
-           h1 {
-               text-align: center;
-               width: 100%;
-               margin: 0 auto;
-               padding: 0 10px;
-           }
+        @media (max-width: 768px) {
+            .search-bar {
+                display: none;
+            }
 
-           .menu-icon {
-               display: block;
-           }
+            .search-icon {
+                display: block;
+            }
 
-           .button-group {
-               display: none;
-               flex-direction: column;
-               gap: 10px;
-               align-items: center;
-               background-color: #004070;
-               position: absolute;
-               top: 60px;
-               right: 20px;
-               padding: 10px;
-               border-radius: 8px;
-               box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-           }
+            .menu-icon {
+                display: block;
+            }
 
-           .button-group.show {
-               display: flex;
-           }
+            .button-group.show .theme-toggle::before {
+                content: "Modo Escuro";
+                font-size: 16px;
+            }
 
-           .search-bar {
-               display: none;
-               margin-top: 10px;
-           }
-       }
+            .button-group.show .search-icon::before {
+                content: "Pesquisar";
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-icon {
+                display: none;
+            }
+
+            .search-icon {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -520,7 +512,6 @@
             searchBar.style.display = searchBar.style.display === 'none' || searchBar.style.display === '' ? 'block' : 'none';
         }
         
-        // Função para fechar o menu ao clicar fora dele
         document.addEventListener('click', function(event) {
             const menu = document.querySelector('.button-group');
             const menuIcon = document.querySelector('.menu-icon');
