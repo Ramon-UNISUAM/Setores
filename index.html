@@ -143,27 +143,28 @@
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            padding: 20px;
-            width: 100%;
-            max-width: 1200px;
-        }
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards se movam para baixo em telas menores */
+    justify-content: center; /* Centraliza os cards dentro do container */
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centraliza o container na tela */
+}
 
-        .card {
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeIn 0.5s ease-in-out;
-            width: 100%;
-            max-width: 400px;
-        }
-
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.5s ease-in-out;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px; /* Adiciona espaçamento ao redor dos cards */
+}
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
