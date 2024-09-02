@@ -32,6 +32,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
         }
 
         header img {
@@ -40,16 +41,29 @@
         }
 
         .menu-icon {
-            display: none;
             font-size: 28px;
             cursor: pointer;
-            color: white;
+            color: #ffffff;
+            margin-left: auto;
+            margin-right: 20px;
         }
 
         .button-group {
-            display: flex;
+            display: none;
+            flex-direction: column;
             gap: 10px;
             align-items: center;
+            background-color: #004070;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-group.show {
+            display: flex;
         }
 
         .theme-toggle {
@@ -88,11 +102,19 @@
             opacity: 1;
         }
 
-        .search-bar {
-            margin-right: 20px;
+        .search-icon {
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
             position: relative;
-            display: flex;
-            align-items: center;
+        }
+
+        .search-bar {
+            display: none;
+            margin-top: 10px;
         }
 
         .search-bar input {
@@ -121,10 +143,11 @@
         }
 
         .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
             width: 100%;
             max-width: 1200px;
         }
@@ -137,6 +160,8 @@
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: fadeIn 0.5s ease-in-out;
+            width: 100%;
+            max-width: 400px;
         }
 
         .card:hover {
@@ -202,7 +227,7 @@
             transform: translateY(-5px);
         }
 
-        .card .show-links {
+        .show-links {
             display: none;
             flex-direction: column;
             gap: 15px;
@@ -272,57 +297,23 @@
             background-color: #444;
         }
 
-        /* Media query para telas pequenas (dispositivos móveis) */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .button-group {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                align-items: flex-start;
-                gap: 5px;
-                margin-top: 10px;
-            }
-
-            .button-group.show {
-                display: flex;
-            }
-
-            .menu-icon {
-                display: block;
-            }
-
-            .search-bar {
-                margin-right: 0;
-                width: 100%;
-            }
-
-            .search-bar input {
-                width: calc(100% - 40px);
-                margin-left: 20px;
-            }
-
-            h1 {
-                font-size: 2em;
-                text-align: center;
-            }
-
             .container {
                 padding: 20px;
             }
 
             .card {
-                padding: 15px;
-                margin-bottom: 10px;
+                width: 90%;
+                max-width: none;
             }
 
-            .card .toggle-link,
-            .card .show-links a {
-                width: 100%;
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .menu-icon {
+                font-size: 24px;
             }
         }
     </style>
@@ -336,10 +327,11 @@
                 🌙
                 <span class="tooltiptext">Ativar modo escuro</span>
             </button>
-            <a href="https://docs.google.com/presentation/d/1S98W_EskCuOKAh6G9iZln9KnS2fPL27fJw7a-59_lSY/edit?usp=sharing" target="_blank" style="padding:10px;margin-right: 20px; background-color:#3b5998; color:white; border:none; border-radius:25px; text-decoration:none;">Orientações</a>
-        </div>
-        <div class="search-bar">
-            <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Buscar setor...">
+            <div class="search-icon" onclick="toggleSearchBar()">🔍</div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="Buscar setor...">
+            </div>
+            <a href="https://docs.google.com/presentation/d/1S98W_EskCuOKAh6G9iZln9KnS2fPL27fJw7a-59_lSY/edit?usp=sharing" target="_blank" style="padding:10px; background-color:#3b5998; color:white; border:none; border-radius:25px; text-decoration:none;">Orientações</a>
         </div>
     </header>
 
@@ -348,7 +340,6 @@
     <div id="noResults">Nenhum setor encontrado.</div>
 
     <div class="container" id="cardContainer">
-        <!-- Card template -->
         <div class="card">
             <h2>Setor Bolsas</h2>
             <div class="tooltip">
@@ -360,128 +351,7 @@
                 <a href="https://meet.jit.si/SetorBolsas" target="_blank">Acesso do Administrador</a>
             </div>
         </div>
-
         <!-- Repetir para os demais setores -->
-        <div class="card">
-            <h2>Setor Coordenação</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorCoordenacao" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorCoordenacao" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Diplomas</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorDiplomas" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorDiplomas" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <!-- Repetir para outros setores -->
-        <div class="card">
-            <h2>Setor Relacionamento</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorRelacionamento" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorRelacionamento" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Captação</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorCaptacao" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorCaptacao" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Retenção e Permanência</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorRetencao" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorRetencao" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Tecnologias Educacionais</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorTecnologiasEducacionais" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorTecnologiasEducacionais" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Suporte Financeiro</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorSuporteFinanceiro" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorSuporteFinanceiro" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Eventos</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorEventos" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorEventos" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Marketing</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorMarketing" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorMarketing" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>Setor Stricto-Sensu</h2>
-            <div class="tooltip">
-                <div class="toggle-link" onclick="toggleLinks(this)">Veja o seu link!</div>
-                <span class="tooltiptext">Clique para acessar os links da reunião</span>
-            </div>
-            <div class="show-links">
-                <a href="https://meet.jit.si/SetorStrictoSensu" target="_blank">Acesso do Participante</a>
-                <a href="https://meet.jit.si/SetorStrictoSensu" target="_blank">Acesso do Administrador</a>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -532,6 +402,11 @@
         function toggleMenu() {
             const buttonGroup = document.querySelector('.button-group');
             buttonGroup.classList.toggle('show');
+        }
+
+        function toggleSearchBar() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = searchBar.style.display === 'none' || searchBar.style.display === '' ? 'block' : 'none';
         }
     </script>
 </body>
